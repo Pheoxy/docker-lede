@@ -4,6 +4,7 @@ MAINTAINER Pheoxy
 
 # global environment settings
 ENV DEBIAN_FRONTEND="noninteractive"
+VOLUME /config
 WORKDIR /config
 
 # install packages
