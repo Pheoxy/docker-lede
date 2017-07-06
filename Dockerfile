@@ -3,44 +3,32 @@ MAINTAINER Pheoxy
 
 
 # global environment settings
-ENV DEBIAN_FRONTEND="noninteractive" \
-PLEX_DOWNLOAD="https://downloads.plex.tv/plex-media-server" \
-PLEX_INSTALL="https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu" \
-PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/config/Library/Application Support" \
-PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver" \
-PLEX_MEDIA_SERVER_INFO_DEVICE=docker \
-PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS="6" \
-PLEX_MEDIA_SERVER_USER=abc
+ENV DEBIAN_FRONTEND="noninteractive"
+WORKDIR /config
 
 # install packages
-RUN \
- apt-get update && \
- apt-get install -y \
-	subversion \
-	g++ \
-	zlib1g-dev \
+RUN apt-get update && apt-get install -y \
 	build-essential \
-	git \
-	python \
-	rsync \
-	libncurses5-dev \
+	file \
+	g++ \
 	gawk \
 	gettext \
-	unzip \
-	file \
+	git \
+	libncurses5-dev \
 	libssl-dev \
-	wget && \
+	python \
+	rsync \
+	subversion \
+	unzip \
+	wget \
+	zlib1g-dev && \
 
 # lede source
- git clone https://git.lede-project.org/source.git lede \
-	cd lede \
-	./scripts/feeds update -a \
-	./scripts/feeds install -a \
- make defconfig \
- make menuconfig \
-
-# change abc home folder to fix plex hanging at runtime with usermod
- usermod -d /app abc && \
+ git clone https://git.lede-project.org/source.git lede && \
+ cd lede && \
+ ./scripts/feeds update -a && \
+ ./scripts/feeds install -a && \
+ make defconfig && \
 
 # cleanup
  apt-get clean && \
@@ -49,8 +37,5 @@ RUN \
 	/var/lib/apt/lists/* \
 	/var/tmp/*
 
-# add local files
-#COPY root/ /
-
 # volumes
-VOLUME /config /targets
+VOLUME /config

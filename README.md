@@ -1,7 +1,7 @@
 [appurl]: https://lede-project.org/
-[hub]: https://hub.docker.com/r/pheoxy/docker-lede/
+[hub]: https://hub.docker.com/r/pheoxy/lede/
 
-# pheoxy/docker-lede
+# pheoxy/lede
 
 [The LEDE Project] (“Linux Embedded Development Environment”) is a Linux operating system based on OpenWrt. It is a complete replacement for the vendor-supplied firmware of a wide range of wireless routers and non-network devices.
 
@@ -10,25 +10,34 @@
 ```
 docker create \
 --name=lede \
---net=host \
 -e PUID=<UID> -e PGID=<GID> \
 -e TZ=<timezone> \
 -v </path/to/config>:/config \
--v </path/to/targets>:/targets \
 pheoxy/lede
+```
+
+## Building
+
+You will need to get shell access `docker exec -it lede /bin/bash` so that you can start building.
+
+Build commands are:
+
+```
+make menuconfig
+make
 ```
 
 ## Parameters
 
 * `--net=host` - Shares host networking with container, **required**.
-* `-v /config` - Plex library location. *This can grow very large, 50gb+ is likely for a large collection.*
-* `-v /targets` - Media goes here. Add as many as needed e.g. `/data/movies`, `/data/tv`, etc.
+* `-v /config` - LEDE Source Location. *This can grow very large, 50gb+ is likely for a large collection.*
 * `-e VERSION=latest` - Set whether to update plex or not - see Setting up application section.
 * `-e PGID=` for for GroupID - see below for explanation
 * `-e PUID=` for for UserID - see below for explanation
 * `-e TZ` - for timezone information *eg Europe/London, etc*
 
-It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it lede /bin/bash`.
+* `make menuconfig` - Bring up Build Menu*
+* `make` - Make Build*
 
 ### User / Group Identifiers
 
