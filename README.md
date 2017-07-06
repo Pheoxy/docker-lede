@@ -30,7 +30,7 @@ make
 ## Parameters
 
 * `-v /config` - LEDE Source Location. *This can grow very large, 50gb+ is likely for a large collection.*
-* `-e VERSION=latest` - Set whether to update plex or not - see Setting up application section.
+* `-e VERSION=latest` - see Setting up application section.
 * `-e PGID=` for for GroupID - see below for explanation
 * `-e PUID=` for for UserID - see below for explanation
 * `-e TZ` - for timezone information *eg Europe/London, etc*
