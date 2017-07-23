@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
  ./scripts/feeds update -a && \
  ./scripts/feeds install -a && \
  make defconfig && \
+ make \
 
 # cleanup
  apt-get clean && \
