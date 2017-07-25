@@ -8,7 +8,8 @@
 ## Usage
 
 ```
-docker create \
+docker run \
+-itd \
 --name=lede \
 -e PUID=<UID> -e PGID=<GID> \
 -e TZ=<timezone> \
