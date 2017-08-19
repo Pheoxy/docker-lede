@@ -37,5 +37,3 @@ RUN apt-get update && apt-get install -y \
 	/tmp/* \
 	/var/lib/apt/lists/* \
 	/var/tmp/*
-
-# volumes
