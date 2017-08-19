@@ -39,4 +39,3 @@ RUN apt-get update && apt-get install -y \
 	/var/tmp/*
 
 # volumes
-VOLUME /config
