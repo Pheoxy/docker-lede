@@ -7,8 +7,12 @@ ENV DEBIAN_FRONTEND="noninteractive"
 VOLUME /config
 #WORKDIR /config
 
+RUN useradd -c /config -s /bin/bash lede
+USER lede
+
 # install packages
-RUN apt-get update && apt-get install -y \
+RUN echo -e "Updating and installing Dependencies:\nPlease wait..." \
+  apt-get update && apt-get install -y \
 	build-essential \
 	file \
 	g++ \
@@ -22,7 +26,8 @@ RUN apt-get update && apt-get install -y \
 	subversion \
 	unzip \
 	wget \
-	zlib1g-dev && \
+	zlib1g-dev \
+	echo -e "Done!" && \
 
 # lede source
 #git clone https://git.lede-project.org/source.git lede && \
